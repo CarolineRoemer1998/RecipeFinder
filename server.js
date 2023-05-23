@@ -17,6 +17,11 @@ app.listen(3000, function(){
     console.log("listening on 3000");
 });
     
+//Get-Requests
 
+//Wir brauchen wahrscheinlich später noch n post dafür?
+app.get("/login", function(req,res){
+    res.render("login");
+});
 
 
