@@ -41,7 +41,7 @@ app.post("/onsignup", function(req,res){
     const _password2 = req.body.password2;
 
     if(_password1==_password2){
-        let selectInfo = db.prepare(`SELECT * FROM benutzer WHERE email='${_email}';`).all();
+        let selectInfo = db.prepare(`SELECT * FROM benutzer WHERE name='${_name}';`).all();
 
         if(selectInfo.length == 0){
             const password = _password1;
@@ -55,3 +55,23 @@ app.post("/onsignup", function(req,res){
     }
 })
 
+app.post("/onlogin", function(req,res){
+    const _name = req.body.name;
+    const _password = req.body.password;
+
+    let selectInfo = db.prepare(`SELECT * FROM benutzer WHERE name='${_name}';`).all();
+
+    if(selectInfo.length>0)
+    {
+        let selectPassword = db.prepare(`SELECT passwort FROM benutzer WHERE name='${_name}';`).all();
+        let passwordSame = passwordHash.verify(_password,selectPassword[0].passwort);
+        if(passwordSame)
+        {
+            res.render('home', {'message': "Du bist erfolgreich angemeldet!"});
+        }
+        else
+        {
+            res.render('home', {'message': `Fehler: Passwort nicht korrekt!`});
+        }
+    }
+})

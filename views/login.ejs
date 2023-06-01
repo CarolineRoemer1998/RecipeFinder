@@ -121,15 +121,15 @@ form.sign-in-form {
     <div class="container">
         <h1 class="logo">RecipeFinder</h1>
         <div class="signin-signup">
-            <form action="" class="sign-in-form">
+            <form action="/onlogin" method="post" class="sign-in-form">
                 <h2 class="title">Log in</h2>
                 <div class="input-field">
-                    <input type="text" placeholder="Benutzername">
+                    <input type="text" name="name" placeholder="Benutzername">
                 </div>
                 <div class="input-field">
-                    <input type="password" placeholder="Passwort">
+                    <input type="password" name="password" placeholder="Passwort">
                 </div>
-                <button type="submit" value="Login" class="btn">Login</button>
+                <button type="submit" class="btn">Login</button>
             </form>
             <a href="signup">
                 <button type="button" class="btn">Registrieren</button>
