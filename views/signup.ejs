@@ -116,33 +116,29 @@ form.sign-in-form {
     </style>
     <title>Login</title>
 </head>
-
 <body>
     <div class="container">
         <h1 class="logo">RecipeFinder</h1>
         <div class="signin-signup">
-            <form action="" class="sign-in-form">
-                <h2 class="title">Sign in</h2>
+            <form action="/onsignup" method="POST" class="sign-in-form">
+                <h2 class="title">Sign up</h2>
                 <div class="input-field">
-                    <input type="text" placeholder="Benutzername">
+                    <input type="text" name="name" placeholder="Benutzername">
                 </div>
                 <div class="input-field">
-                    <input type="email" placeholder="E-Mail">
+                    <input type="email" name="email" placeholder="E-Mail">
                 </div>
                 <div class="input-field">
-                    <input type="password1" placeholder="Passwort">
+                    <input type="password" name="password1" placeholder="Passwort">
                 </div>
                 <div class="input-field">
-                    <input type="password2" placeholder="Passwort wiederholen">
+                    <input type="password" name="password2" placeholder="Passwort wiederholen">
                 </div>
-                <button type="submit" value="Signin" class="btn">Signin</button>
+                <button type="submit" value="Signup" class="btn">Sign up</button>
             </form>
-            <a href="login">
-                <button type="button" class="btn">Einloggen</button>
-            </a>
+            <a href="login"><button type="button" class="btn">Einloggen</button></a>
         </div>
         </div>
     </div>
 </body>
-
 </html>

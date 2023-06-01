@@ -1,31 +1,57 @@
-//Hausaufgabe von Nick Helmke Woche 4
-//INIT express
+// ----------------------------------------------------------
+// Initialisierungen
+// ----------------------------------------------------------
 const express = require("express");
 const app = express();
 app.use(express.urlencoded({extended:true}));
 
-//INIT EJS
 app.engine(".ejs", require("ejs").__express);
 app.set("view engine", "ejs");
 
-//INIT SQLITE3
 const DATABASE = "recipeFinder.db";
 const db = require("better-sqlite3")(DATABASE); 
 
-//Started den Webserver
 app.listen(3000, function(){
     console.log("listening on 3000");
 });
-    
-//Get-Requests
 
-//Wir brauchen wahrscheinlich später noch n post dafür?
+const passwordHash = require('password-hash');
+
+// ----------------------------------------------------------
+// Get-Requests
+// ----------------------------------------------------------
+
+// Wir brauchen wahrscheinlich später noch n post dafür?
 app.get("/login", function(req,res){
     res.render("login");
 });
 
-app.get("/signin", function(req,res){
-    res.render("signin");
+app.get("/signup", function(req,res){
+    res.render("signup");
 });
 
+// ----------------------------------------------------------
+// Post-Requests
+// ----------------------------------------------------------
+
+app.post("/onsignup", function(req,res){
+    const _name = req.body.name;
+    const _email = req.body.email;
+    const _password1 = req.body.password1;
+    const _password2 = req.body.password2;
+
+    if(_password1==_password2){
+        let selectInfo = db.prepare(`SELECT * FROM benutzer WHERE email='${_email}';`).all();
+
+        if(selectInfo.length == 0){
+            const password = _password1;
+            const hash = passwordHash.generate(password);
+            db.exec(`INSERT INTO benutzer (name,passwort,email) VALUES ('${_name}', '${hash}', '${_email}');`)
+            res.render('home', {'message': "Du bist erfolgreich registriert!"});
+        }
+        else{
+            res.render('home', {'message': `Fehler: Benutzername ${_name} existiert bereits!`});
+        }
+    }
+})
 
