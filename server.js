@@ -8,6 +8,9 @@ app.use(express.urlencoded({extended:true}));
 app.engine(".ejs", require("ejs").__express);
 app.set("view engine", "ejs");
 
+//Lässt es zu das Dateien aus dem public ordner geladen werden können
+app.use(express.static(__dirname + '/public'));
+
 const DATABASE = "recipeFinder.db";
 const db = require("better-sqlite3")(DATABASE); 
 
@@ -61,7 +64,7 @@ app.post("/onlogin", function(req,res){
 
     let selectInfo = db.prepare(`SELECT * FROM benutzer WHERE name='${_name}';`).all();
 
-    if(selectInfo.length>0)
+    if(selectInfo.length==1)
     {
         let selectPassword = db.prepare(`SELECT passwort FROM benutzer WHERE name='${_name}';`).all();
         let passwordSame = passwordHash.verify(_password,selectPassword[0].passwort);

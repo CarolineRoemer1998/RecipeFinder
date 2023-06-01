@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #ffffff;
+}
+.container {
+    position: relative;
+    width: 70vw;
+    height: 80vh;
+    background: #fff;
+    padding-top: 65px;
+    justify-content: space-around;
+    display: flex;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.signin-signup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    z-index: 5;
+}
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 40%;
+    min-width: 238px;
+    padding: 0 10px;
+}
+form.sign-in-form {
+    opacity: 1;
+    transition: 0.5s ease-in-out;
+    transition-delay: 1s;
+}
+.title {
+    font-size: 35px;
+    color: #228b5a;
+    margin-bottom: 10px;
+}
+.logo {
+    font-size: 35px;
+    color: #126840;
+    margin-bottom: 10px;
+}
+.input-field {
+    width: 100%;
+    height: 50px;
+    background: #f0f0f0;
+    margin: 10px 0;
+    border: 2px solid #126840;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+}
+::placeholder{
+    text-align: center;
+}
+.input-field input {
+    flex: 5;
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 600;
+    color: #444;
+    text-align: center;
+}
+.btn {
+    width: 150px;
+    height: 50px;
+    border: none;
+    border-radius: 50px;
+    background: #228b5a;
+    color: #fff;
+    font-weight: 600;
+    margin: 10px 0;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.btn:hover {
+    background: #126840;
+}
+
+.content {
+    color: #fff;
+    transition: 1.1s ease-in-out;
+    transition-delay: 0.5s;
+}
