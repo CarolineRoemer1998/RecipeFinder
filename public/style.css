@@ -104,3 +104,46 @@ form.sign-in-form {
     transition: 1.1s ease-in-out;
     transition-delay: 0.5s;
 }
+
+.navbar{
+    margin-bottom: auto;
+    width: 100vw;
+    background-color: #ffffff;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+.navbar ul{
+    list-style: none;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1em 0;
+}
+.navbar li a {
+    text-decoration: none;
+    color: black;
+    padding-right: 3em;
+    position: relative;
+    transition: all ease-in-out 200ms;
+}
+.navbar li a::after{
+    content: '';
+    position: absolute;
+    display: block;
+    height : 0.3em;
+    width: 0%;
+    background-color: #228b5a;
+    bottom: -0.5em;
+    transition: all ease-in-out 200ms;
+}
+.navbar li a:hover::after{
+    width: 80%;  
+}
+.navbar li a:hover{
+    color: #228b5a;
+}
+.navbar li:first-child{
+    margin: auto;
+    margin-left: 3em;
+}

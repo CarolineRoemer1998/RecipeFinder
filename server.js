@@ -18,13 +18,12 @@ app.listen(3000, function(){
     console.log("listening on 3000");
 });
 
-const passwordHash = require('password-hash');
+//const passwordHash = require('password-hash'); konnte den Server damit nicht starten
 
 // ----------------------------------------------------------
 // Get-Requests
 // ----------------------------------------------------------
 
-// Wir brauchen wahrscheinlich später noch n post dafür?
 app.get("/login", function(req,res){
     res.render("login");
 });
@@ -78,3 +77,10 @@ app.post("/onlogin", function(req,res){
         }
     }
 })
+// erstmal als get zum testen
+app.get("/home", function(req,res){
+    res.render("home");
+});
+app.get("/pantry", function(req,res){
+    res.render("pantry");
+});
