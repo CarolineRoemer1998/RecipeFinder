@@ -18,7 +18,9 @@ app.listen(3000, function(){
     console.log("listening on 3000");
 });
 
-//const passwordHash = require('password-hash'); konnte den Server damit nicht starten
+//Wenn du den Server nicht starten kannst musst du password-hash runterladen, 
+//mit dem Befehl: npm install password-hash --save
+const passwordHash = require('password-hash');
 
 // ----------------------------------------------------------
 // Get-Requests
