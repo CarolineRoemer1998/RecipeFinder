@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <title>Login</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <title>Login</title>
+    </head>
 
-<body>
-    <div class="container">
-        <h1 class="logo">RecipeFinder</h1>
-        <div class="signin-signup">
-            <form action="/onlogin" method="post" class="sign-in-form">
-                <h2 class="title">Log in</h2>
-                <div class="input-field">
-                    <input type="text" name="name" placeholder="Benutzername">
-                </div>
-                <div class="input-field">
-                    <input type="password" name="password" placeholder="Passwort">
-                </div>
-                <button type="submit" class="btn">Login</button>
-            </form>
-            <a href="signup">
-                <button type="button" class="btn">Registrieren</button>
-            </a>
+    <body>
+        <div class="container">
+            <h1 class="logo">RecipeFinder</h1>
+            <div class="signin-signup">
+                <form action="/onlogin" method="post" class="sign-in-form">
+                    <h2 class="title">Log in</h2>
+                    <div class="input-field">
+                        <input type="text" name="name" placeholder="Benutzername">
+                    </div>
+                    <div class="input-field">
+                        <input type="password" name="password" placeholder="Passwort">
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                </form>
+                <a href="signup">
+                    <button type="button" class="btn">Registrieren</button>
+                </a>
+            </div>
         </div>
-        </div>
-    </div>
-</body>
-
+    <% if(status==1){%><script>alert ("Das Passwort ist falsch!");</script><%}%>
+    <% if(status==2){%><script>alert ("Der Benutzer existiert nicht!");</script><%}%>
+    </body>
 </html>

@@ -22,16 +22,33 @@ app.listen(3000, function(){
 //mit dem Befehl: npm install password-hash --save
 const passwordHash = require('password-hash');
 
+const session = require('express-session');
+app.use(session({
+ secret: 'geheim123',
+ resave: false,
+ saveUninitialized: true
+}));
+
+
 // ----------------------------------------------------------
 // Get-Requests
 // ----------------------------------------------------------
 
 app.get("/login", function(req,res){
-    res.render("login");
+    res.render("login", {'status': 0});
 });
 
 app.get("/signup", function(req,res){
-    res.render("signup");
+    res.render("signup", {'status': 0});
+});
+
+// erstmal als get zum testen
+app.get("/home", function(req,res){
+    res.render("home");
+});
+
+app.get("/pantry", function(req,res){
+    res.render("pantry");
 });
 
 // ----------------------------------------------------------
@@ -51,11 +68,15 @@ app.post("/onsignup", function(req,res){
             const password = _password1;
             const hash = passwordHash.generate(password);
             db.exec(`INSERT INTO benutzer (name,passwort,email) VALUES ('${_name}', '${hash}', '${_email}');`)
-            res.render('home', {'message': "Du bist erfolgreich registriert!"});
+            res.redirect('/home');
+            req.session['sessionValue'] = db.prepare(`SELECT id FROM benutzer WHERE name='${_name}';`).all()[0].id;
         }
         else{
-            res.render('home', {'message': `Fehler: Benutzername ${_name} existiert bereits!`});
+            res.render('signup', {'status': 2});
         }
+    }
+    else{
+        res.render('signup', {'status':1})
     }
 })
 
@@ -71,18 +92,22 @@ app.post("/onlogin", function(req,res){
         let passwordSame = passwordHash.verify(_password,selectPassword[0].passwort);
         if(passwordSame)
         {
-            res.render('home', {'message': "Du bist erfolgreich angemeldet!"});
+            res.redirect('/home');
+            req.session['sessionValue'] = db.prepare(`SELECT id FROM benutzer WHERE name='${_name}';`).all()[0].id;
         }
         else
         {
-            res.render('home', {'message': `Fehler: Passwort nicht korrekt!`});
+            // 1 = Passwort falsch | 2 = Benutzer existiert nicht
+            
+            let _status = 1
+            res.render('login', {'status': _status})
+            console.log("Status: " + _status)
         }
     }
+    else
+    {
+        let _status = 2
+        res.render('login', {'status': _status})
+        console.log("Status: " + _status)
+    }
 })
-// erstmal als get zum testen
-app.get("/home", function(req,res){
-    res.render("home");
-});
-app.get("/pantry", function(req,res){
-    res.render("pantry");
-});
