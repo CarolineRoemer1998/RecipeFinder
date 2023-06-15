@@ -38,6 +38,13 @@ app.get("/login", function(req,res){
     res.render("login", {'status': 0});
 });
 
+app.get("/logout", function(req,res){    
+    console.log(req.session.sessionValue);
+    delete req.session['sessionValue'];
+    console.log(req.session.sessionValue);
+    res.render("login", {'status': 0});
+});
+
 app.get("/signup", function(req,res){
     res.render("signup", {'status': 0});
 });

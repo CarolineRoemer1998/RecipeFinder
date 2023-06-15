@@ -143,6 +143,42 @@ form.sign-in-form {
 .navbar li a:hover{
     color: #228b5a;
 }
+.logout-button {
+    border:none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size:16px;
+}
+
+.logout-form {
+    width:auto;
+}
+.navbar li button {
+    text-decoration: none;
+    color: black;
+    padding-right: 3em;
+    position: relative;
+    transition: all ease-in-out 200ms;
+}
+.navbar li button::after{
+    content: '';
+    position: absolute;
+    display: block;
+    height : 0.3em;
+    width: 0%;
+    background-color: #228b5a;
+    bottom: -0.5em;
+    transition: all ease-in-out 200ms;
+}
+.navbar li button:hover::after{
+    width: 80%;  
+}
+.navbar li button:hover{
+    color: #228b5a;
+}
 .navbar li:first-child{
     margin: auto;
     margin-left: 3em;
