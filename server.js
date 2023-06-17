@@ -22,9 +22,9 @@ const passwordHash = require('password-hash');
 
 const session = require('express-session');
 app.use(session({
- secret: 'geheim123',
+ secret: 'secret',
  resave: false,
- saveUninitialized: true
+ saveUninitialized: false
 }));
 
 
@@ -37,9 +37,9 @@ app.get("/login", function(req,res){
 });
 
 app.get("/logout", function(req,res){    
-    console.log(req.session.sessionValue);
+    console.log(req.session['sessionValue']);
     delete req.session['sessionValue'];
-    console.log(req.session.sessionValue);
+    console.log(req.session['sessionValue']);
     res.render("login", {'status': 0});
 });
 
@@ -49,6 +49,7 @@ app.get("/signup", function(req,res){
 
 // erstmal als get zum testen
 app.get("/home", function(req,res){
+    console.log(req.session['sessionValue']);
     res.render("home");
 });
 
@@ -103,7 +104,7 @@ app.post("/onlogin", function(req,res){
         {
             res.redirect('/home');
             req.session['sessionValue'] = db.prepare(`SELECT id FROM benutzer WHERE name='${_name}';`).all()[0].id;
-            console.log(req.session.sessionValue);
+            console.log(req.session['sessionValue']);
         }
         else
         {
