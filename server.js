@@ -102,9 +102,9 @@ app.post("/onlogin", function(req,res){
         let passwordSame = passwordHash.verify(_password,selectPassword[0].passwort);
         if(passwordSame)
         {
-            res.redirect('/home');
             req.session['sessionValue'] = db.prepare(`SELECT id FROM benutzer WHERE name='${_name}';`).all()[0].id;
             console.log(req.session['sessionValue']);
+            res.redirect('/home');
         }
         else
         {
