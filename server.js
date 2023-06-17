@@ -75,8 +75,8 @@ app.post("/onsignup", function(req,res){
             const password = _password1;
             const hash = passwordHash.generate(password);
             db.exec(`INSERT INTO benutzer (name,passwort,email) VALUES ('${_name}', '${hash}', '${_email}');`)
-            res.redirect('/home');
             req.session['sessionValue'] = db.prepare(`SELECT id FROM benutzer WHERE name='${_name}';`).all()[0].id;
+            res.redirect('/home');
         }
         else
         {
