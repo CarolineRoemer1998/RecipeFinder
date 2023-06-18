@@ -27,6 +27,31 @@ app.use(session({
  saveUninitialized: false
 }));
 
+// ----------------------------------------------------------
+// Objekte
+// ----------------------------------------------------------
+
+let zutaten = db.prepare(`SELECT * FROM zutat;`).all();
+
+// ----------------------------------------------------------
+// Funktionen
+// ----------------------------------------------------------
+
+function fillZutaten(id){
+    console.log(id)
+    let alleZutaten = db.prepare(`SELECT * FROM zutat;`).all();
+    let benutzerZutaten = db.prepare(`SELECT zutat.name FROM zutat JOIN benutzerzutat ON zutat.id = zutatid JOIN benutzer ON benutzerid = benutzer.id WHERE benutzer.id = ${id};`).all();
+    let resultList = []
+    for(let i = 1;i <= alleZutaten.length(); i++){
+        if(benutzerZutaten.includes(alleZutaten[i].name)){
+            resultList.push([{id:alleZutaten[i].id,name:alleZutaten[i].name,vorhanden:true}])
+        }
+        else{
+            resultList.push([{id:alleZutaten[i].id,name:alleZutaten[i].name,vorhanden:false}])
+        }
+    }
+    return resultList;
+}
 
 // ----------------------------------------------------------
 // Get-Requests
@@ -49,12 +74,11 @@ app.get("/signup", function(req,res){
 
 // erstmal als get zum testen
 app.get("/home", function(req,res){
-    console.log(req.session['sessionValue']);
     res.render("home");
 });
 
 app.get("/pantry", function(req,res){
-    res.render("pantry");
+    res.render("pantry", {'Zutaten':fillZutaten(String(req.session['sessionValue']))});
 });
 
 // ----------------------------------------------------------
@@ -94,6 +118,8 @@ app.post("/onlogin", function(req,res){
     const _name = req.body.name;
     const _password = req.body.password;
 
+    console.log(zutaten[0].name)
+
     let selectInfo = db.prepare(`SELECT * FROM benutzer WHERE name='${_name}';`).all();
 
     if(selectInfo.length==1)
@@ -103,7 +129,6 @@ app.post("/onlogin", function(req,res){
         if(passwordSame)
         {
             req.session['sessionValue'] = db.prepare(`SELECT id FROM benutzer WHERE name='${_name}';`).all()[0].id;
-            console.log(req.session['sessionValue']);
             res.redirect('/home');
         }
         else
