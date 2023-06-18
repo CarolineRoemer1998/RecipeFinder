@@ -38,16 +38,15 @@ let zutaten = db.prepare(`SELECT * FROM zutat;`).all();
 // ----------------------------------------------------------
 
 function fillZutaten(id){
-    console.log(id)
     let alleZutaten = db.prepare(`SELECT * FROM zutat;`).all();
     let benutzerZutaten = db.prepare(`SELECT zutat.name FROM zutat JOIN benutzerzutat ON zutat.id = zutatid JOIN benutzer ON benutzerid = benutzer.id WHERE benutzer.id = ${id};`).all();
     let resultList = []
-    for(let i = 1;i <= alleZutaten.length(); i++){
-        if(benutzerZutaten.includes(alleZutaten[i].name)){
-            resultList.push([{id:alleZutaten[i].id,name:alleZutaten[i].name,vorhanden:true}])
+    for(let i = 0; i < alleZutaten.length; i++){
+        if(benutzerZutaten.includes(alleZutaten[i])){
+            resultList.push({id:alleZutaten[i].id,name:alleZutaten[i].name,vorhanden:true})
         }
         else{
-            resultList.push([{id:alleZutaten[i].id,name:alleZutaten[i].name,vorhanden:false}])
+            resultList.push({id:alleZutaten[i].id,name:alleZutaten[i].name,vorhanden:false})
         }
     }
     return resultList;
@@ -62,9 +61,7 @@ app.get("/login", function(req,res){
 });
 
 app.get("/logout", function(req,res){    
-    console.log(req.session['sessionValue']);
     delete req.session['sessionValue'];
-    console.log(req.session['sessionValue']);
     res.render("login", {'status': 0});
 });
 
