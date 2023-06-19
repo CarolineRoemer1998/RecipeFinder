@@ -1,22 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <title>Vorratskammer</title>
-</head>
-<body>
-    <div class="navbar">
-        <ul>
-            <li><a href="home">Home</a></li>
-            <li><a href="login">Logout</a></li>
-        </ul>
-    </div>
-    <form action=""></form>
-    <% for(let i = 0; i < Zutaten.length; i++){%>
-        <p><%= Zutaten[i].name %></p><br>
-    <%}%>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <title>Vorratskammer</title>
+    </head>
+    <body class="nav-body">
+        <div>
+            <div class="navbar">
+                <ul>
+                    <li><a href="home">Home</a></li>
+                    <li><a href="login">Logout</a></li>
+                </ul>
+            </div>
+            <form action="/onsave" method="post"></form>
+                <div id="grid" class="container" style="align-self: stretch;">
+                    <% for(let i = 0; i < Zutaten.length; i++){%>
+                        <div id="item">
+                            <% if (Zutaten[i].vorhanden) { %>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="checkbox" checked></input>
+                                        </td>
+                                        <td>
+                                            <label for="checkbox"><%= Zutaten[i].name %></label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            <% } else if  (Zutaten[i].vorhanden == false) { %>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="checkbox" ></input>
+                                        </td>
+                                        <td>
+                                            <label for="checkbox"><%= Zutaten[i].name %></label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            <% } %>
+                        </div>
+                    <%}%>
+                    
+                </div>
+                <input class="btn save-btn" type="button" name="save" id="save" value="Speichern">
+            </form>
+        </div>
+    </body>
 </html>
