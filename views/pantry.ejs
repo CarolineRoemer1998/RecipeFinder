@@ -15,39 +15,23 @@
                     <li><a href="login">Logout</a></li>
                 </ul>
             </div>
-            <form action="/onsave" method="post"></form>
-                <div id="grid" class="container" style="align-self: stretch;">
-                    <% for(let i = 0; i < Zutaten.length; i++){%>
-                        <div id="item">
-                            <% if (Zutaten[i].vorhanden) { %>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" id="checkbox" checked></input>
-                                        </td>
-                                        <td>
-                                            <label for="checkbox"><%= Zutaten[i].name %></label>
-                                        </td>
-                                    </tr>
-                                </table>
-                            <% } else if  (Zutaten[i].vorhanden == false) { %>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" id="checkbox" ></input>
-                                        </td>
-                                        <td>
-                                            <label for="checkbox"><%= Zutaten[i].name %></label>
-                                        </td>
-                                    </tr>
-                                </table>
-                            <% } %>
-                        </div>
-                    <%}%>
-                    
-                </div>
-                <input class="btn save-btn" type="button" name="save" id="save" value="Speichern">
-            </form>
+            <div id="grid" class="container" style="align-self: stretch;">
+                <% for(let i = 0; i < Zutaten.length; i++){%>
+                    <div id="item">
+                        <% if (Zutaten[i].vorhanden) { %>
+                            <label> <input type="checkbox" id="<%= Zutaten[i].id %>" checked onclick="onCheckClick(Zutaten[i].id)">&nbsp; <%= Zutaten[i].name %> </input> </label>
+                        <% } else if  (Zutaten[i].vorhanden == false) { %>
+                            <label> <input type="checkbox" id="<%= Zutaten[i].id %>" onclick="onCheckClick(Zutaten[i].id);">&nbsp; <%= Zutaten[i].name %> </input> </label>
+                        <% } %>
+                    </div>
+                <%}%>
+            </div>
         </div>
+        <script>
+            function onCheckClick(id){
+                var cd = document.getElementById(id);
+                console.log(cd.checked)
+            }
+        </script>
     </body>
 </html>

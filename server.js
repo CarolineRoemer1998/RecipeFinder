@@ -32,13 +32,14 @@ app.use(session({
 // ----------------------------------------------------------
 
 let zutaten = db.prepare(`SELECT * FROM zutat;`).all();
+let alleZutaten = []
 
 // ----------------------------------------------------------
 // Funktionen
 // ----------------------------------------------------------
 
 function fillZutaten(id){
-    let alleZutaten = db.prepare(`SELECT * FROM zutat;`).all();
+    alleZutaten = db.prepare(`SELECT * FROM zutat;`).all();
     let benutzerZutaten = db.prepare(`SELECT zutat.name FROM zutat JOIN benutzerzutat ON zutat.id = zutatid JOIN benutzer ON benutzerid = benutzer.id WHERE benutzer.id = ${id};`).all();
     let resultList = []
     for(let i = 0; i < alleZutaten.length; i++){
@@ -138,4 +139,15 @@ app.post("/onlogin", function(req,res){
     {
         res.render('login', {'status': 2})
     }
+})
+
+app.post("/onsave", function(req,res){
+    let results = []
+    for (let i = 0; i < alleZutaten.length; i++){
+        //let temp = `req.body.n${i+1}`
+        //let temp2 = eval(temp)
+        //console.log(temp2)
+        //results.push({id:alleZutaten[i].id,ausgewählt:})
+    }
+    res.redirect('/pantry');
 })

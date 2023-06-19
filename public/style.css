@@ -203,13 +203,13 @@ form.sign-in-form {
     overflow: auto;
     width: 80vw;
     margin: 3% 10% 0 10%;
-    grid-template-columns: 15% 15% 15% 15%;
+    grid-template-columns: 20% 20% 20% 20%;
 }
   
 #item {
     background-color: rgb(223, 223, 223);
     padding: 10px;
-    height: 45px;
+    height: 37px;
 }
 
 .save-btn {
