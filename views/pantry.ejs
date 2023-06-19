@@ -19,17 +19,16 @@
                 <% for(let i = 0; i < Zutaten.length; i++){%>
                     <div id="item">
                         <% if (Zutaten[i].vorhanden) { %>
-                            <label> <input type="checkbox" id="<%= Zutaten[i].id %>" checked onclick="onCheckClick(Zutaten[i].id)">&nbsp; <%= Zutaten[i].name %> </input> </label>
+                            <label> <input type="checkbox" id="<%= Zutaten[i].id %>" checked onclick="onCheckClick(this)">&nbsp; <%= Zutaten[i].name %> </input> </label>
                         <% } else if  (Zutaten[i].vorhanden == false) { %>
-                            <label> <input type="checkbox" id="<%= Zutaten[i].id %>" onclick="onCheckClick(Zutaten[i].id);">&nbsp; <%= Zutaten[i].name %> </input> </label>
+                            <label> <input type="checkbox" id="<%= Zutaten[i].id %>" onclick="onCheckClick(this);">&nbsp; <%= Zutaten[i].name %> </input> </label>
                         <% } %>
                     </div>
                 <%}%>
             </div>
         </div>
         <script>
-            function onCheckClick(id){
-                var cd = document.getElementById(id);
+            function onCheckClick(cd){
                 console.log(cd.checked)
             }
         </script>
