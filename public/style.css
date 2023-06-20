@@ -201,8 +201,8 @@ form.sign-in-form {
     border-radius: 15px;
     box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
     overflow: auto;
-    width: 80vw;
-    margin: 3% 10% 0 10%;
+    width: 90vw;
+    margin: 7% 10% 0 10%;
     grid-template-columns: 20% 20% 20% 20%;
 }
   

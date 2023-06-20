@@ -40,10 +40,10 @@ let alleZutaten = []
 
 function fillZutaten(id){
     alleZutaten = db.prepare(`SELECT * FROM zutat;`).all();
-    let benutzerZutaten = db.prepare(`SELECT zutat.name FROM zutat JOIN benutzerzutat ON zutat.id = zutatid JOIN benutzer ON benutzerid = benutzer.id WHERE benutzer.id = ${id};`).all();
+    let benutzerZutaten = db.prepare(`SELECT zutat.id, zutat.name FROM zutat JOIN benutzerzutat ON zutat.id = zutatid JOIN benutzer ON benutzerid = benutzer.id WHERE benutzer.id = ${id};`).all();
     let resultList = []
     for(let i = 0; i < alleZutaten.length; i++){
-        if(benutzerZutaten.includes(alleZutaten[i])){
+        if(benutzerZutaten.some(e => e.id === alleZutaten[i].id)){
             resultList.push({id:alleZutaten[i].id,name:alleZutaten[i].name,vorhanden:true})
         }
         else{
@@ -142,12 +142,19 @@ app.post("/onlogin", function(req,res){
 })
 
 app.post("/onsave", function(req,res){
-    let results = []
+    let benutzerZutaten_old = db.prepare(`SELECT zutat.id, zutat.name FROM zutat JOIN benutzerzutat ON zutat.id = zutatid JOIN benutzer ON benutzerid = benutzer.id WHERE benutzer.id = ${req.session['sessionValue']};`).all();
     for (let i = 0; i < alleZutaten.length; i++){
-        //let temp = `req.body.n${i+1}`
-        //let temp2 = eval(temp)
-        //console.log(temp2)
-        //results.push({id:alleZutaten[i].id,ausgewählt:})
+        let temp = `req.body.box_${i+1}`
+        let temp2 = eval(temp)
+        if (temp2 == "t"){
+            if(!benutzerZutaten_old.some(e => e.id === alleZutaten[i].id)){
+                db.exec(`INSERT INTO benutzerzutat (zutatid, benutzerid) VALUES (${alleZutaten[i].id}, ${req.session['sessionValue']});`)
+            }
+        } else {
+            if(benutzerZutaten_old.some(e => e.id === alleZutaten[i].id)){
+                db.exec(`DELETE FROM benutzerzutat WHERE zutatid='${alleZutaten[i].id}' AND benutzerid='${req.session['sessionValue']}';`)
+            }
+        }
     }
     res.redirect('/pantry');
 })
