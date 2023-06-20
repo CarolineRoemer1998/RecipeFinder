@@ -113,7 +113,7 @@ form.sign-in-form {
 .navbar{
     margin-bottom: auto;
     width: 100vw;
-    height: 60px;
+    height: 50px;
     background-color: #ffffff;
     font-weight: bold;
     box-shadow: 0 0 20px rgba(0,0,0,0.15);
@@ -204,6 +204,22 @@ form.sign-in-form {
     width: 90vw;
     margin: 7% 10% 0 10%;
     grid-template-columns: 20% 20% 20% 20%;
+    align-self: stretch;
+}
+
+#search-container {
+    display: flex;
+    gap: 10px;
+    position: relative;
+    background: #fff;
+    padding-top: 65px;
+    justify-content: space-evenly;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    width: 90vw;
+    margin: 7% 10% 0 10%;
+    align-self: stretch;
 }
   
 #item {
@@ -220,3 +236,12 @@ form.sign-in-form {
     height: 70px;
     font-size: large;
 }
+
+.search-btn {
+    position: absolute;
+    left:20%;
+    bottom:20px;
+    width: 150px;
+    height: 50px;
+}
+

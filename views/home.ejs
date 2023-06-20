@@ -7,15 +7,23 @@
         <link rel="stylesheet" type="text/css" href="style.css" />
         <title>Home</title>
     </head>
-    <body>
-        <div class="navbar">
-            <ul>
-                <li><a href="home">Home</a></li>
-                <li><a href="pantry">Vorratskammer</a></li>
-                <form class="logout-form" action="/logout" method="get">    
-                    <li><button class="logout-button" type="submit">Logout</button></li>
-                </form>
-            </ul>
+    <body class="nav-body">
+        <div>
+            <div class="navbar">
+                <ul>
+                    <li><a href="home">Home</a></li>
+                    <li><a href="pantry">Vorratskammer</a></li>
+                    <form class="logout-form" action="/logout" method="get">    
+                        <li><button class="logout-button" type="submit">Logout</button></li>
+                    </form>
+                </ul>
+            </div>
+            <form action="/search" method="post">
+                <div id="search-container" class="container">
+                    <button type="submit" class="btn search-btn" >Suchen</button>
+                </div>
+            </form>
         </div>
+        
     </body>
 </html>
