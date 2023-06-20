@@ -18,12 +18,20 @@
                     </form>
                 </ul>
             </div>
-            <form action="/search" method="post">
-                <div id="search-container" class="container">
+            <div id="outer-container"> 
+                <form action="/search" method="post" id="search-container" class="container">
                     <button type="submit" class="btn search-btn" >Suchen</button>
+                </form>
+                <h1 class="home_h1">Vorratskammer</h1>
+                <h1 class="home_h2">Rezept Generator</h1>
+                <div id="display-container" class="container">
+                    <% for(let i = 0; i < Zutaten.length; i++){%>
+                        <div id="item">
+                            <label> <%= Zutaten[i].name %> </label>
+                        </div>
+                    <%}%>
                 </div>
-            </form>
+            </div>
         </div>
-        
     </body>
 </html>

@@ -72,7 +72,8 @@ app.get("/signup", function(req,res){
 
 // erstmal als get zum testen
 app.get("/home", function(req,res){
-    res.render("home");
+    let benutzerZutaten = db.prepare(`SELECT zutat.id, zutat.name FROM zutat JOIN benutzerzutat ON zutat.id = zutatid JOIN benutzer ON benutzerid = benutzer.id WHERE benutzer.id = ${req.session['sessionValue']};`).all();
+    res.render("home", {'Zutaten':benutzerZutaten});
 });
 
 app.get("/pantry", function(req,res){
@@ -115,8 +116,6 @@ app.post("/onsignup", function(req,res){
 app.post("/onlogin", function(req,res){
     const _name = req.body.name;
     const _password = req.body.password;
-
-    console.log(zutaten[0].name)
 
     let selectInfo = db.prepare(`SELECT * FROM benutzer WHERE name='${_name}';`).all();
 

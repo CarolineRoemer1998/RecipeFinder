@@ -12,7 +12,9 @@
             <div class="navbar">
                 <ul>
                     <li><a href="home">Home</a></li>
-                    <li><a href="login">Logout</a></li>
+                    <form class="logout-form" action="/logout" method="get">    
+                        <li><button class="logout-button" type="submit">Logout</button></li>
+                    </form>
                 </ul>
             </div>
             <form action="/onsave" method="post">
