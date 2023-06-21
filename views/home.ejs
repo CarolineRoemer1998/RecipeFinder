@@ -19,12 +19,20 @@
                 </ul>
             </div>
             <div id="outer-container"> 
-                <form action="/search" method="post" id="search-container" class="container">
-                    <button type="submit" class="btn search-btn" >Suchen</button>
+                <form action="/ongenerate" method="post" id="search-container" class="container">
+                    <h1 class="home_h2">Rezept Generator</h1>
+                    <p class="column3"></p>
+                    <p class="column3"></p>
+                    <label class="column3"><input type="radio" name="filter" value="Frühstück">Frühstück</input></label>
+                    <label class="column3"><input type="radio" name="filter" value="Mittagessen">Mittagessen</input></label>
+                    <label class="column3"><input type="radio" name="filter" value="Abendessen">Abendessen</input></label>
+                    <label class="column3"><input type="radio" name="filter" value="*">Beliebig</input></label>
+                    <p class="column3"></p>
+                    <p class="column3"></p>
+                    <button type="submit" class="btn column3" >Suchen</button>
                 </form>
-                <h1 class="home_h1">Vorratskammer</h1>
-                <h1 class="home_h2">Rezept Generator</h1>
                 <div id="display-container" class="container">
+                    <h1 class="home_h1">Vorratskammer</h1>
                     <% for(let i = 0; i < Zutaten.length; i++){%>
                         <div id="item">
                             <label> <%= Zutaten[i].name %> </label>

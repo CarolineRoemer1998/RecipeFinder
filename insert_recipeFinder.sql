@@ -35,12 +35,18 @@ INSERT INTO zutat (name) VALUES ('Hühnerbrustfilets');
 /* Insert Befehle für die Rezepte */
 INSERT INTO rezept (name, art, beschreibung) VALUES 
     ('Zitronenpasta', 'Mittagessen', '
-    1. Koche die Pasta gemäß den Anweisungen auf der Verpackung al dente.\n
-    2. Während die Pasta kocht, presse den Saft aus den Zitronen und reibe die Schale von einer Zitrone ab.\n
-    3. In einer Pfanne das Olivenöl erhitzen und den fein gehackten Knoblauch darin anbraten, bis er leicht golden ist.\n
-    4. Den Zitronensaft und die abgeriebene Zitronenschale zum Knoblauch in die Pfanne geben und für 1-2 Minuten köcheln lassen.\n
-    5. Die gekochte Pasta abgießen und in die Pfanne geben. Gut vermischen, so dass die Pasta mit der Zitronen-Knoblauch-Mischung überzogen ist.\n
-    6. Die Pasta auf Teller verteilen und nach Belieben mit geriebenem Parmesan-Käse bestreuen.\n
+    1. Koche die Pasta gemäß den Anweisungen auf der Verpackung al dente.
+
+    2. Während die Pasta kocht, presse den Saft aus den Zitronen und reibe die Schale von einer Zitrone ab.
+
+    3. In einer Pfanne das Olivenöl erhitzen und den fein gehackten Knoblauch darin anbraten, bis er leicht golden ist.
+
+    4. Den Zitronensaft und die abgeriebene Zitronenschale zum Knoblauch in die Pfanne geben und für 1-2 Minuten köcheln lassen.
+
+    5. Die gekochte Pasta abgießen und in die Pfanne geben. Gut vermischen, so dass die Pasta mit der Zitronen-Knoblauch-Mischung überzogen ist.
+
+    6. Die Pasta auf Teller verteilen und nach Belieben mit geriebenem Parmesan-Käse bestreuen.
+
     7. Sofort servieren und genießen!');
 INSERT INTO rezeptzutat (zutatid, rezeptid) VALUES ((SELECT zutat.id FROM zutat WHERE zutat.name = 'Spaghetti'), (SELECT rezept.id FROM rezept WHERE rezept.name = 'Zitronenpasta'));
 INSERT INTO rezeptzutat (zutatid, rezeptid) VALUES ((SELECT zutat.id FROM zutat WHERE zutat.name = 'Zitrone'), (SELECT rezept.id FROM rezept WHERE rezept.name = 'Zitronenpasta'));
@@ -50,11 +56,16 @@ INSERT INTO rezeptzutat (zutatid, rezeptid) VALUES ((SELECT zutat.id FROM zutat 
 
 INSERT INTO rezept (name, art, beschreibung) VALUES 
     ('Avocado-Hühnchen-Salat', 'Mittagessen', '
-    1. In einer großen Schüssel die Hühnerbruststücke, Avocadowürfel und gehackte Zwiebeln vermengen.\n
-    2. Den Zitronensaft über die Mischung gießen und vorsichtig umrühren, um die Avocado zu benetzen und das Anlaufen zu verhindern.\n
-    3. Mit Salz und Pfeffer abschmecken und nochmals umrühren, um alle Zutaten gut zu kombinieren.\n
-    4. Den Avocado-Hühnchen-Salat für mindestens 30 Minuten im Kühlschrank ziehen lassen, damit sich die Aromen gut entfalten.\n
-    5. Vor dem Servieren nochmals abschmecken und bei Bedarf nachwürzen.\n
+    1. In einer großen Schüssel die Hühnerbruststücke, Avocadowürfel und gehackte Zwiebeln vermengen.
+
+    2. Den Zitronensaft über die Mischung gießen und vorsichtig umrühren, um die Avocado zu benetzen und das Anlaufen zu verhindern.
+
+    3. Mit Salz und Pfeffer abschmecken und nochmals umrühren, um alle Zutaten gut zu kombinieren.
+
+    4. Den Avocado-Hühnchen-Salat für mindestens 30 Minuten im Kühlschrank ziehen lassen, damit sich die Aromen gut entfalten.
+
+    5. Vor dem Servieren nochmals abschmecken und bei Bedarf nachwürzen.
+    
     6. Den Salat alleine genießen oder auf Sandwiches, Wraps oder Salatblättern servieren.');
 INSERT INTO rezeptzutat (zutatid, rezeptid) VALUES ((SELECT zutat.id FROM zutat WHERE zutat.name = 'Hühnerbrustfilets'), (SELECT rezept.id FROM rezept WHERE rezept.name = 'Avocado-Hühnchen-Salat'));
 INSERT INTO rezeptzutat (zutatid, rezeptid) VALUES ((SELECT zutat.id FROM zutat WHERE zutat.name = 'Avocado'), (SELECT rezept.id FROM rezept WHERE rezept.name = 'Avocado-Hühnchen-Salat'));

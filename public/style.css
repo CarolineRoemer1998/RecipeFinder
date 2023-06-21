@@ -202,8 +202,8 @@ form.sign-in-form {
     box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
     overflow: auto;
     width: 90vw;
-    margin: 7% 10% 0 10%;
-    grid-template-columns: 20% 20% 20% 20%;
+    margin: 3% 5% 0 5%;
+    grid-template-columns: repeat(4, 20%);
     align-self: stretch;
 }
   
@@ -219,14 +219,15 @@ form.sign-in-form {
 }
 
 #search-container {
-    display: flex;
+    display: grid;
+    grid-auto-flow: row; /* or 'row', 'row dense', 'column dense' */
+    grid-template-columns: repeat(7, 15%);
+    grid-template-rows: repeat(auto-fill, 7%);
     gap: 10px;
     position: absolute;
-    background: #fff;
-    justify-content: space-evenly;
     border-radius: none;
     box-shadow: none;
-    top: 20vh;
+    top: 12vh;
     width: 45vw;
     height: 65vh;
     align-self: stretch;
@@ -234,18 +235,36 @@ form.sign-in-form {
 #display-container {
     display: grid;
     grid-auto-flow: row; /* or 'row', 'row dense', 'column dense' */
-    grid-template-columns: 20% 20%;
+    grid-template-columns: repeat(2, 20%);
     grid-template-rows: repeat(auto-fill, 7%);
     gap: 10px;
     position: absolute;
-    top: 20vh;
+    top: 12vh;
     left: 50vw;
-    background: #fff;
     justify-content: space-evenly;
     border-radius: none;
     box-shadow: none;
     width: 45vw;
     height: 65vh;
+    align-self: stretch;
+    overflow: auto;
+}
+
+#rezept-container {
+    display: grid;
+    gap: 10px;
+    grid-auto-flow: row; /* or 'row', 'row dense', 'column dense' */
+    position: relative;
+    background: #fff;
+    padding-top: 65px;
+    justify-content: space-evenly;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+    overflow: visible;
+    width: 90vw;
+    margin: 3% 5% 0 5%;
+    grid-template-columns: repeat(5, 7%);
+    grid-template-rows: 7% 5% repeat(auto-fill, 2%);
     align-self: stretch;
 }
   
@@ -256,17 +275,44 @@ form.sign-in-form {
 }
 
 .home_h1 {
-    position: absolute;
-    top: 15%;
-    left: 66%;
-
+    grid-column-start: 1;
+    grid-column-end: 3;
+    
 }
 
 .home_h2 {
-    position: absolute;
-    top: 15%;
-    left: 18%;
+    grid-column-start: 3;
+    grid-column-end: 6;
 
+}
+
+.rezept-h1 {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    font-size: 35px;
+    color: #228b5a;
+    margin-bottom: 10px;
+}
+.rezept-h2 {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    font-size: 25px;
+    color: #228b5a;
+    margin-bottom: 10px;
+}
+.rezept-h3 {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    font-size: 25px;
+    color: #228b5a;
+    margin-bottom: 10px;
+}
+.rezept-p1 {
+    grid-column-start: 2;
+    grid-column-end: 6;
+    grid-row-start: 3;
+    white-space: pre-wrap;
 }
 
 .save-btn {
@@ -278,11 +324,10 @@ form.sign-in-form {
     font-size: large;
 }
 
-.search-btn {
-    position: absolute;
-    left:35%;
-    bottom:20%;
-    width: 150px;
-    height: 50px;
+.column1 {
+    grid-column-start: 1;
 }
 
+.column3 {
+    grid-column-start: 3;
+}

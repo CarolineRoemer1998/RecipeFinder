@@ -5,30 +5,30 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="style.css" />
-        <title>Vorratskammer</title>
+        <title>Rezept</title>
     </head>
     <body class="nav-body">
         <div>
             <div class="navbar">
                 <ul>
                     <li><a href="home">Home</a></li>
+                    <li><a href="pantry">Vorratskammer</a></li>
                     <form class="logout-form" action="/logout" method="get">    
                         <li><button class="logout-button" type="submit">Logout</button></li>
                     </form>
                 </ul>
             </div>
-            <form action="/onsave" method="post" id="grid" class="container">
+            <div id="rezept-container" class="container">
+                <h1 class="rezept-h1"> <%= Rezept.name %> </h1>
+                <h1 class="rezept-h2"> Zutaten:</h1>
                 <% for(let i = 0; i < Zutaten.length; i++){%>
-                    <div id="item">
-                        <% if (Zutaten[i].vorhanden) { %>
-                            <label> <input type="checkbox" name="box_<%= Zutaten[i].id %>" checked value="t"> &nbsp; <%= Zutaten[i].name %> </input> </label>
-                        <% } else if  (Zutaten[i].vorhanden == false) { %>
-                            <label> <input type="checkbox" name="box_<%= Zutaten[i].id %>" value="t"> &nbsp; <%= Zutaten[i].name %> </input> </label>
-                        <% } %>
+                    <div class="column1">
+                        <label > <%= Zutaten[i].name %> </label>
                     </div>
                 <%}%>
-                <button type="submit" class="save-btn btn" >Speichern</button>
-            </form>
+                <h1 class="rezept-h3">Beschreibung:</h1>
+                <p class="rezept-p1"><%= Rezept.beschreibung %></p>
+            </div>
         </div>
     </body>
 </html>

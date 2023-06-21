@@ -145,15 +145,62 @@ app.post("/onsave", function(req,res){
     for (let i = 0; i < alleZutaten.length; i++){
         let temp = `req.body.box_${i+1}`
         let temp2 = eval(temp)
-        if (temp2 == "t"){
-            if(!benutzerZutaten_old.some(e => e.id === alleZutaten[i].id)){
+        if (temp2 == "t")
+        {
+            //prüft ob der benutzer die zutat schon vor der änderung eingetragen hatte
+            if(!benutzerZutaten_old.some(e => e.id === alleZutaten[i].id))
+            {
                 db.exec(`INSERT INTO benutzerzutat (zutatid, benutzerid) VALUES (${alleZutaten[i].id}, ${req.session['sessionValue']});`)
             }
-        } else {
-            if(benutzerZutaten_old.some(e => e.id === alleZutaten[i].id)){
+        } 
+        else 
+        {
+            if(benutzerZutaten_old.some(e => e.id === alleZutaten[i].id))
+            {
                 db.exec(`DELETE FROM benutzerzutat WHERE zutatid='${alleZutaten[i].id}' AND benutzerid='${req.session['sessionValue']}';`)
             }
         }
     }
-    res.redirect('/pantry');
+    res.redirect('/home');
+})
+
+app.post("/ongenerate", function(req, res){
+    let benutzerZutaten = db.prepare(`SELECT zutat.id, zutat.name FROM zutat JOIN benutzerzutat ON zutat.id = zutatid JOIN benutzer ON benutzerid = benutzer.id WHERE benutzer.id = ${req.session['sessionValue']};`).all();
+    const _filter = req.body.filter;
+    let alleRezepte = [];
+    if(_filter =='*'){
+         alleRezepte = db.prepare(`SELECT * FROM rezept;`).all();
+    }    
+    else
+    {
+         alleRezepte = db.prepare(`SELECT * FROM rezept WHERE art='${_filter}';`).all();
+    }
+    let verfügbareRezepte = [];
+    for (let i = 0; i < alleRezepte.length; i++)
+    {
+        let hatZutaten = true;
+        let rezeptZutaten = db.prepare(`SELECT zutat.id, zutat.name FROM zutat JOIN rezeptzutat ON zutat.id = zutatid JOIN rezept ON rezeptid = rezept.id WHERE rezept.id = ${alleRezepte[i].id};`).all();
+        for (let j = 0; j < rezeptZutaten.length; j++)
+        {
+            if(!benutzerZutaten.some(e => e.id === rezeptZutaten[j].id))
+            {
+                hatZutaten = false;
+                break;
+            }
+        }
+        if(hatZutaten)
+        {
+            verfügbareRezepte.push(alleRezepte[i]);
+        }
+    }
+    let auswahl = Math.floor(Math.random() * verfügbareRezepte.length)
+    if (verfügbareRezepte.length > 0)
+    {
+        let zutaten = db.prepare(`SELECT zutat.id, zutat.name FROM zutat JOIN rezeptzutat ON zutat.id = zutatid JOIN rezept ON rezeptid = rezept.id WHERE rezept.id = ${alleRezepte[auswahl].id};`).all();
+        res.render('rezept', {'Rezept': verfügbareRezepte[auswahl],'Zutaten': zutaten })
+    }
+    else
+    {
+        res.redirect('/home');
+    }
 })
